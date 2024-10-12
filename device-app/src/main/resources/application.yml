@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/smart_home
+    url: jdbc:postgresql://localhost:5432/device-db
     username: your_username
     password: your_password
     hikari:
@@ -20,4 +20,4 @@ spring:
       schema-locations: classpath:init.sql
 
 server:
-  port: 8083
+  port: 8082

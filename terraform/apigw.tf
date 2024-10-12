@@ -1,10 +1,9 @@
-
-resource "kubernetes_deployment" "hello_world" {
+resource "kubernetes_deployment" "kusk_api_gw" {
   metadata {
-    name      = "hello-world"
+    name      = "kusk-api-gw"
     namespace = "default"
     labels = {
-      app = "hello-world"
+      app = "kusk-api-gw"
     }
   }
 
@@ -13,36 +12,36 @@ resource "kubernetes_deployment" "hello_world" {
 
     selector {
       match_labels = {
-        app = "hello-world"
+        app = "kusk-api-gw"
       }
     }
 
     template {
       metadata {
         labels = {
-          app = "hello-world"
+          app = "kusk-api-gw"
         }
       }
 
       spec {
         container {
-          name  = "hello-world"
-          image = "kubeshop/kusk-hello-world:v1.0.0"
+          name  = "kusk-api-gw"
+          image = "kubeshop/kusk-api-gw:v1.0.0"
         }
       }
     }
   }
 }
 
-resource "kubernetes_service" "hello_world_svc" {
+resource "kubernetes_service" "kusk_api_gw_svc" {
   metadata {
-    name      = "hello-world-svc"
+    name      = "smart-home-gw-svc"
     namespace = "default"
   }
 
   spec {
     selector = {
-      app = "hello-world"
+      app = "kusk-api-gw"
     }
 
     port {

@@ -3,11 +3,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>ru.yandex.practicum</groupId>
-    <artifactId>smart-home-monolith</artifactId>
+    <artifactId>telemetry-app</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
-    <name>smart-home-monolith</name>
+    <name>telemetry-app</name>
 
     <parent>
         <groupId>org.springframework.boot</groupId>

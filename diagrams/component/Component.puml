@@ -1,0 +1,37 @@
+@startuml
+title SmartHome Web Application Component Diagram
+
+top to bottom direction
+
+!includeurl https://raw.githubusercontent.com/RicardoNiepel/C4-PlantUML/master/C4_Component.puml
+
+Container_Boundary(SmartHomeSystem, "SmartHome System") {
+  Container(DeviceApp, "Device Management Application", "Java, Spring", "Handles user interactions")
+  Container(TelemetryApp, "Telemetery Application", "Java, Spring", "Handles user interactions")
+  Container(DeviceDatabase, "Database", "PostgreSQL", "Stores device data")
+  Container(TelemetryDatabase, "Database", "PostgreSQL", "Stores telemetry data")
+}
+
+Container(DeviceApp, "Device Management Application", "Java, Spring") {
+  Component(DeviceController, "DeviceController", "Handles authentication and authorization")
+  Component(DeviceServiceLayer, "Service Layer", "Business logic")
+  Component(DeviceRepositoryLayer, "Repository Layer", "Data access logic")
+}
+
+Container(TelemetryApp, "Telemetry Application", "Java, Spring") {
+  Component(TelemetryDataController, "TelemetryDataController", "Handles authentication and authorization")
+  Component(TelemetryDataServiceLayer, "Service Layer", "Business logic")
+  Component(TelemetryDataRepositoryLayer, "Repository Layer", "Data access logic")
+}
+
+Rel(DeviceServiceLayer,TelemetryDataController,"Calls business logic")
+
+Rel(DeviceController,DeviceServiceLayer,"Calls business logic")
+Rel(DeviceServiceLayer,DeviceRepositoryLayer,"Reads/Writes data")
+Rel(DeviceRepositoryLayer,DeviceDatabase,"Reads/Writes user data")
+
+Rel(TelemetryDataController,TelemetryDataServiceLayer,"Calls business logic")
+Rel(TelemetryDataServiceLayer,TelemetryDataRepositoryLayer,"Reads/Writes data")
+Rel(TelemetryDataRepositoryLayer,TelemetryDatabase,"Reads/Writes user data")
+
+@enduml

@@ -62,6 +62,7 @@ kusk deploy -i api.yaml
 ## Проверяем работоспособность
 
 ```bash
+kubectl get svc -l "app.kubernetes.io/part-of=kusk-gateway,app.kubernetes.io/component=envoy-svc,fleet=kusk-gateway-envoyfleet.kusk-system" --namespace kusk-system
 kubectl port-forward svc/kusk-gateway-envoy-fleet -n kusk-system 8080:80
 curl localhost:8080/hello
 ```

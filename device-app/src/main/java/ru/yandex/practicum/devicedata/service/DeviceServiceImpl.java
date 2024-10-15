@@ -1,14 +1,11 @@
 package ru.yandex.practicum.devicedata.service;
 
 import lombok.RequiredArgsConstructor;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
-import ru.yandex.practicum.devicedata.controller.DeviceController;
-import ru.yandex.practicum.devicedata.repository.DeviceRepository;
 import ru.yandex.practicum.devicedata.dto.DeviceDto;
 import ru.yandex.practicum.devicedata.dto.DeviceStatusDto;
 import ru.yandex.practicum.devicedata.entity.Device;
+import ru.yandex.practicum.devicedata.repository.DeviceRepository;
 
 import java.util.Optional;
 

@@ -4,6 +4,7 @@ COPY . .
 RUN mvn clean package -DskipTests
  
 FROM eclipse-temurin:17.0.5_8-jre-alpine@sha256:02c04793fa49ad5cd193c961403223755f9209a67894622e05438598b32f210e
+LABEL org.opencontainers.image.source="https://github.com/mukminova/yandex-architecture-sprint-3"
 WORKDIR /opt/app
 RUN addgroup --system javauser && adduser -S -s /usr/sbin/nologin -G javauser javauser
 COPY --from=builder /build/target/smart-home-monolith-1.0-SNAPSHOT.jar app.jar

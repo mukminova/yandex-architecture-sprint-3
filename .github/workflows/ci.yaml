@@ -25,8 +25,7 @@ jobs:
           platforms: linux/amd64,linux/arm64
           context: smart-home-monolith
           push: true
-          tags:
-            - ghcr.io/mukminova/architecture-sprint-3:latest
+          tags: ghcr.io/mukminova/architecture-sprint-3:latest
           cache-from: type=gha
           cache-to: type=gha,mode=max
       - name: Build and push device-app
@@ -35,8 +34,7 @@ jobs:
           platforms: linux/amd64,linux/arm64
           context: device-app
           push: true
-          tags:
-            - ghcr.io/mukminova/device-app:latest
+          tags: ghcr.io/mukminova/device-app:latest
           cache-from: type=gha
           cache-to: type=gha,mode=max
       - name: Build and push telemetry-app
@@ -45,7 +43,6 @@ jobs:
           platforms: linux/amd64,linux/arm64
           context: telemetry-app
           push: true
-          tags:
-            - ghcr.io/mukminova/telemetry-app:latest
+          tags: ghcr.io/mukminova/telemetry-app:latest
           cache-from: type=gha
           cache-to: type=gha,mode=max

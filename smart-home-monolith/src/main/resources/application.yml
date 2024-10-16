@@ -1,8 +1,8 @@
 spring:
   datasource:
-    url: jdbc:postgresql://smart-home-monolith-postgresql.default:5432/smart_home
-    username: your_username
-    password: your_password
+    url: jdbc:postgresql://smart-home-monolith-postgresql.default.svc.cluster.local:5432/smart_home
+    username: ${POSTGRES_USER}
+    password: ${POSTGRES_PASSWORD}
     hikari:
       allow-pool-suspension: true
   jpa:
@@ -20,4 +20,4 @@ spring:
       schema-locations: classpath:init.sql
 
 server:
-  port: 8080
+  port: 8083

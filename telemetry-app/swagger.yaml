@@ -1,0 +1,151 @@
+openapi: '3.0.0'
+info:
+  title: SmartHome API
+  version: '1.0.0'
+paths:
+  /devices/{id}/telemetry/latest:
+    get:
+      summary: Get telemetry data by device Id
+      parameters:
+        - name: id
+          in: path
+          description: Device Id
+          required: true
+          schema:
+            type: integer
+            format: int64
+          example:
+            id: 1
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TelemetryData"
+              example:
+                commandType: "increase"
+                value: 10
+                changeDate: 2024-10-09T08:25:06.212Z
+                device:
+                  deviceType: thermometer
+                  serialNumber: cvb01kh3253
+                  houseAddress: "some city, some house"
+                  status: on
+        '404':
+          description: Device not found response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  statusCode:
+                    type: integer
+                  message:
+                    type: string
+        '500':
+          description: Server error response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  statusCode:
+                    type: integer
+                  message:
+                    type: string
+  /devices/{id}/telemetry:
+    get:
+      summary: Get telemetry data by device Id
+      parameters:
+        - name: id
+          in: path
+          description: Device Id
+          required: true
+          schema:
+            type: integer
+            format: int64
+          example:
+            id: 1
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/TelemetryData"
+              example:
+                - commandType: "increase"
+                  value: 10
+                  changeDate: 2024-10-09T08:25:06.212Z
+                  device:
+                    deviceType: thermometer
+                    serialNumber: cvb01kh3253
+                    houseAddress: "some city, some house"
+                    status: on
+                - commandType: "decrease"
+                  value: 5
+                  changeDate: 2024-10-09T10:25:06.212Z
+                  device:
+                    deviceType: thermometer
+                    serialNumber: cvb01kh3253
+                    houseAddress: "some city, some house"
+                    status: on
+
+        '404':
+          description: Device not found response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  statusCode:
+                    type: integer
+                  message:
+                    type: string
+        '500':
+          description: Server error response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  statusCode:
+                    type: integer
+                  message:
+                    type: string
+components:
+  schemas:
+    TelemetryData:
+      type: object
+      properties:
+        device:
+          $ref: "#/components/schemas/Device"
+        commandType:
+          type: string
+        value:
+          type: integer
+        changeDate:
+          type: string
+          format: date-time
+      required:
+        - id
+        - name
+    Device:
+      type: object
+      properties:
+        id:
+          type: integer
+        deviceType:
+          type: string
+        houseAddress:
+          type: string
+        serialNumber:
+          type: string
+        status:
+          type: string
+      required:
+        - id
+        - name

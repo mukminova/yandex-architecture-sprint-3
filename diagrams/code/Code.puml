@@ -1,0 +1,46 @@
+@startuml
+title Smart Home ERD Diagram
+
+top to bottom direction
+
+!includeurl https://raw.githubusercontent.com/RicardoNiepel/C4-PlantUML/master/C4_Component.puml
+
+entity User {
+  +Long id
+  +String name
+}
+
+entity House {
+  +Long id
+  +Long userId
+  +String title
+  +String address
+}
+
+entity Device {
+  +Long id
+  +Long houseId
+  +Long typeId
+  +String serialNumber
+  +String status
+}
+
+enum DeviceType {
+  +Long id
+  +String title
+}
+
+entity TelemetryData {
+  +Long id
+  +String deviceId
+  +String commandType
+  +Long value
+  +LocalDateTime changeDate
+}
+
+User "1" -- "0..*" House : has
+House "1" -- "0..*" Device : has
+Device "1" -- "1" DeviceType
+Device "1" -- "0..*" TelemetryData : has
+
+@enduml

@@ -1,0 +1,31 @@
+@startuml
+title SmartHome Container Diagram
+
+top to bottom direction
+
+!includeurl https://raw.githubusercontent.com/RicardoNiepel/C4-PlantUML/master/C4_Component.puml
+
+Person(user, "User", "A user of the smart home system")
+System_Ext(sensors, "Sensors API", "Датчики")
+System(SmartHomeSystem, "SmartHome System", "Heating control and temperature monitoring in a smart home")
+
+Container_Boundary(SmartHomeSystem, "SmartHome System") {
+  Container(ApiGateway, "ApiGateway", "Java, Spring", "Сервис для взаимодействия с пользователями")
+  Container(SmartHomeMonolith, "Smart Home Application", "Java, Spring", "Монолитная система по управлению умным домом")
+  Container(SmartHomeMessageBroker, "SmartHome Message Broker", "RabbitMQ", "Брокер сообщений для изменений состояний устройств")
+  Container(DeviceApp, "Device Management Application", "Java, Spring", "Управление устройствами")
+  Container(TelemetryApp, "Telemetry Application", "Java, Spring", "Сохранение телеметрии")
+  ContainerDb(DeviceDatabase, "Database", "PostgreSQL", "Состояние устройств в реальном времени")
+  ContainerDb(TelemetryDatabase, "Database", "MongoDB", "Сохранение изменений состояний с устройств")
+}
+
+Rel(user, ApiGateway, "включать/выключать отопление, устанавливать температуру")
+Rel(ApiGateway, SmartHomeMonolith, "call")
+Rel(SmartHomeMonolith, SmartHomeMessageBroker, "Отправка событий о изменении состояний устройств")
+Rel(SmartHomeMonolith, DeviceApp, "Отправка запроса на изменение состояния устройств")
+Rel(SmartHomeMessageBroker, TelemetryApp, "Подписка на события и запись в бд", "async")
+Rel(DeviceApp,DeviceDatabase,"Reads/Writes device current state")
+Rel(TelemetryApp,TelemetryDatabase,"Reads/Writes device history state")
+Rel(DeviceApp,sensors,"управление датчиками")
+
+@enduml

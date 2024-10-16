@@ -1,0 +1,26 @@
+@startuml
+title SmartHome Context Diagram
+
+top to bottom direction
+
+!includeurl https://raw.githubusercontent.com/RicardoNiepel/C4-PlantUML/master/C4_Component.puml
+
+/'
+Система по управлению умным домом подразделяется на доменные области:
+1. Управление устройствами. Пользователи могут удалённо включать/выключать приборы в своих домах.
+А также устанавливать желаемые состояния устройств.
+
+2. Телеметрия устройств.
+Просмотр изменения состояния - данные с датчиков, установленных в домах.
+'/
+
+Person(user, "User", "A user of the smart home system")
+
+System(SmartHomeSystem, "SmartHome System", "Heating control and temperature monitoring in a smart home")
+
+System_Ext(sensors, "Sensors API", "Датчики")
+
+Rel(user, SmartHomeSystem, "включать/выключать отопление, устанавливать температуру")
+Rel(SmartHomeSystem, sensors, "управление датчиками")
+
+@enduml

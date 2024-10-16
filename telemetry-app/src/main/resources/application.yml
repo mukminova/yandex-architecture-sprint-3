@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/telemetry-db
+    url: jdbc:postgresql://telemetry-app-postgresql.default.svc.cluster.local:5432/telemetry-db
     username: your_username
     password: your_password
     hikari:

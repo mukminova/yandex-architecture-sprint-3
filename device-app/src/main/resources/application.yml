@@ -1,7 +1,7 @@
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/device-db
-    username: your_username
+    url: jdbc:postgresql://device-app-postgresql.default.svc.cluster.local:5432/device-db
+    username: ${POSTGRES_PASSWORD}
     password: your_password
     hikari:
       allow-pool-suspension: true
